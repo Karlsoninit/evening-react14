@@ -1,14 +1,31 @@
-import React from 'react';
-import Profile from './Profile/Profile';
-import everithing from '../everithing.json';
+import React, { Component } from 'react';
+import TasksContainer from './TasksContainer';
 
-const App = () => (
-  <>
-    <Profile
-      everithing={everithing}
-      defaultImage="https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero-00e10b1f.jpg"
-    />
-  </>
-);
+const fn = () => {
+  console.log('inner fn');
+};
+class App extends Component {
+  state = {
+    users: [],
+  };
+
+  getUserInfo = user => {
+    this.setState(prevState => ({
+      users: [...prevState.users, user],
+    }));
+    console.log(this.state);
+
+    fn();
+  };
+
+  render() {
+    console.log(this.state.users);
+    return (
+      <>
+        <TasksContainer getUser={this.getUserInfo} />
+      </>
+    );
+  }
+}
 
 export default App;

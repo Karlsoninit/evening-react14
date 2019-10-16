@@ -41,6 +41,8 @@
         "ignoreClassFields": true
       }
     ],
+    "react/jsx-props-no-spreading": 0,
+    "react/state-in-constructor": 0
 
   },
   "globals": {
