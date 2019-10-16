@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import FormInput from '../FormInput/FormInput';
-
+import shortId from 'shortid';
 const initialState = {
-  login: '',
-  email: '',
-  password: '',
+  task: '',
+  description: '',
 };
 
-class TasksContainer extends Component {
+class FormContainer extends Component {
   state = { ...initialState };
 
   handleSubmit = e => {
@@ -21,11 +20,12 @@ class TasksContainer extends Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
+      id: shortId(),
     });
   };
 
   render() {
-    const { login, email, password } = this.state;
+    const { task, description } = this.state;
     return (
       <form
         style={{
@@ -38,20 +38,14 @@ class TasksContainer extends Component {
       >
         <FormInput
           type="text"
-          value={login}
-          name="login"
+          value={task}
+          name="task"
           onChange={this.handleChange}
         />
         <FormInput
-          type="email"
-          value={email}
-          name="email"
-          onChange={this.handleChange}
-        />
-        <FormInput
-          type="password"
-          value={password}
-          name="password"
+          type="text"
+          value={description}
+          name="description"
           onChange={this.handleChange}
         />
 
@@ -61,4 +55,4 @@ class TasksContainer extends Component {
   }
 }
 
-export default TasksContainer;
+export default FormContainer;

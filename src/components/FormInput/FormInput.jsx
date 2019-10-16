@@ -11,6 +11,7 @@ const FormInput = ({ value, name, onChange, type }) => (
       onChange={onChange}
       name={name}
       value={value}
+      required
     />
   </label>
 );
