@@ -17,7 +17,9 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
+    "react-loader-spinner": "^3.1.4",
     "react-scripts": "3.1.2",
+    "react-select": "^3.0.8",
     "shortid": "^2.2.15",
     "styled-components": "^4.4.0"
   },
