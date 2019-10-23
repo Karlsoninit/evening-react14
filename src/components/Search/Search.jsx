@@ -1,4 +1,5 @@
 import React from 'react';
+import toggle from '../HOC/ToggleHOC';
 
 const Search = ({ handleSubmit, handleChange }) => (
   <form onSubmit={handleSubmit}>
@@ -7,4 +8,4 @@ const Search = ({ handleSubmit, handleChange }) => (
   </form>
 );
 
-export default Search;
+export default toggle({ name: 'search' })(Search);

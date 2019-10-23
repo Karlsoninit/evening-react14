@@ -10,6 +10,7 @@ class News extends Component {
     news: [],
     query: '',
     spinner: false,
+    selectValue: null,
   };
 
   componentDidMount() {
@@ -21,8 +22,11 @@ class News extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log('prevState', prevState.query);
-    // console.log('this.state', this.state.query);
+    console.log('prevState', prevState.selectValue);
+    console.log('this.state', this.state.selectValue);
+    if (prevState.selectValue !== this.state.selectValue) {
+      this.fetchNews(this.state.selectValue);
+    }
   }
 
   fetchNews = query => {
@@ -44,21 +48,27 @@ class News extends Component {
   };
 
   handleChange = evt => {
-    // console.log(evt.target.value);
     this.setState({
       query: evt.target.value,
     });
   };
 
+  onChange = ({ value }) => {
+    this.setState({
+      selectValue: value,
+    });
+  };
+
   render() {
     const { news, spinner } = this.state;
+    console.log('re - render');
     return (
       <>
         <Search
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        <NewsSelect />
+        <NewsSelect onChange={this.onChange} />
         {spinner && <Loader />}
         {news.length > 0 && <NewsList data={news} />}
       </>
