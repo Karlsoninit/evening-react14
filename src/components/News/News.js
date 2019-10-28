@@ -3,6 +3,7 @@ import NewsList from '../NewsList/NewsList';
 import Search from '../Search/Search';
 import Loader from '../Loader/Loader';
 import NewsSelect from '../NewsSelect/NewsSelect';
+import RenderPropHOC from '../HOC/renderPropHOC';
 
 import { getNews } from '../api';
 class News extends Component {
@@ -64,10 +65,21 @@ class News extends Component {
     console.log('re - render');
     return (
       <>
-        <Search
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-        />
+        <RenderPropHOC>
+          {({ isOpen, toggle }) => {
+            return (
+              <>
+                <button onClick={toggle}>open</button>
+                {isOpen && (
+                  <Search
+                    handleSubmit={this.handleSubmit}
+                    handleChange={this.handleChange}
+                  />
+                )}
+              </>
+            );
+          }}
+        </RenderPropHOC>
         <NewsSelect onChange={this.onChange} />
         {spinner && <Loader />}
         {news.length > 0 && <NewsList data={news} />}

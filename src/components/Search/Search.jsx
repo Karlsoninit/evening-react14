@@ -8,4 +8,6 @@ const Search = ({ handleSubmit, handleChange }) => (
   </form>
 );
 
-export default toggle({ name: 'search' })(Search);
+// export default toggle({ name: 'search' })(Search);
+
+export default Search;
