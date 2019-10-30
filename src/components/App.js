@@ -1,10 +1,10 @@
 import React, { Component, createContext } from 'react';
-import News from './News/News';
 
-// const colorTheme = {
-//   theme: 'black',
-//   size: '30px',
-// };
+import { Route, Switch, Link, NavLink } from 'react-router-dom';
+
+import Header from './navigation/header/Header';
+import Nav from './navigation/nav/Nav';
+
 export const { Provider, Consumer } = createContext({
   someText: 'text',
 });
@@ -12,19 +12,6 @@ export const { Provider, Consumer } = createContext({
 export const myProvider = createContext({
   someText: 'text',
 });
-
-console.log(myProvider);
-// export const Theme = createContext(); default method
-
-// const App = () => (
-//   <>
-//     <Provider value={{ ...colorTheme }}>
-//       <News />
-//     </Provider>
-//   </>
-// );
-
-// export default App;
 
 class App extends Component {
   state = {
@@ -40,11 +27,14 @@ class App extends Component {
   changeColor = () => {
     console.log('change');
   };
+
   render() {
     const { theme } = this.state;
     return (
       <>
-        <button
+        <Header />
+        <Nav />
+        {/* <button
           style={{
             backgroundColor: theme === 'white' ? 'black' : 'white',
             color: theme === 'white' ? 'white' : 'black',
@@ -60,7 +50,7 @@ class App extends Component {
           }}
         >
           <News />
-        </Provider>
+        </Provider> */}
       </>
     );
   }

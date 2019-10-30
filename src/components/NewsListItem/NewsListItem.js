@@ -1,27 +1,42 @@
 import React from 'react';
 import { Consumer } from '../App';
 import css from './NewsListItem.module.css';
-
+import { Link, NavLink } from 'react-router-dom';
 // console.log('css', css);
 
-const NewsListItem = ({ title, urlToImage, description }) => (
+const NewsListItem = ({
+  title,
+  urlToImage,
+  description,
+  publishedAt,
+  category,
+}) => (
   <>
     <Consumer>
       {value => {
-        console.log('NewsListItem CONSUMER', value);
+        // console.log('NewsListItem CONSUMER', value);
         return (
-          <div
-            className={css.container}
-            style={{
-              backgroundColor: `${value.theme}`,
-              color: `${value.theme === 'black' ? 'white' : 'black'}`,
+          <Link
+            style={{ textDecoration: 'none' }}
+            to={{
+              pathname: `/news/${publishedAt}/${title}`,
+              state: {
+                category: category,
+              },
             }}
           >
-            <button onClick={() => value.fn()}>click me !</button>
-            <h2>{title}</h2>
-            <img style={{ width: '100%' }} src={urlToImage} />
-            <p>{description}</p>
-          </div>
+            <div
+              className={css.container}
+              style={{
+                backgroundColor: `${value.theme}`,
+                color: `${value.theme === 'black' ? 'white' : 'black'}`,
+              }}
+            >
+              <h2>{title}</h2>
+              <img style={{ width: '100%' }} src={urlToImage} />
+              <p>{description}</p>
+            </div>
+          </Link>
         );
       }}
     </Consumer>

@@ -6,6 +6,7 @@ import NewsSelect from '../NewsSelect/NewsSelect';
 import RenderPropHOC from '../HOC/renderPropHOC';
 
 import { getNews } from '../api';
+
 class News extends Component {
   state = {
     news: [],
@@ -82,7 +83,9 @@ class News extends Component {
         </RenderPropHOC>
         <NewsSelect onChange={this.onChange} />
         {spinner && <Loader />}
-        {news.length > 0 && <NewsList data={news} />}
+        {news.length > 0 && (
+          <NewsList category={this.state.selectValue} data={news} />
+        )}
       </>
     );
   }
