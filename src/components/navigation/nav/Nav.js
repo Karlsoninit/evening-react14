@@ -10,8 +10,8 @@ const Nav = () => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route path="/about" component={About} />
-    <Route path="/news/:someArticle" component={someArticle} />
-    <Route path="/news" component={News} />
+    <Route path="/newss/:someArticle" component={someArticle} />
+    <Route path="/newss" component={News} />
     <Route component={ErrorPage} />
   </Switch>
 );

@@ -10,6 +10,7 @@ const NewsListItem = ({
   description,
   publishedAt,
   category,
+  param,
 }) => (
   <>
     <Consumer>
@@ -19,9 +20,10 @@ const NewsListItem = ({
           <Link
             style={{ textDecoration: 'none' }}
             to={{
-              pathname: `/news/${publishedAt}/${title}`,
+              pathname: `${param}/category=${category}&search=${publishedAt}&name=${title}`,
               state: {
                 category: category,
+                params: param,
               },
             }}
           >

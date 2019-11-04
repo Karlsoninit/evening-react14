@@ -14,7 +14,7 @@ const Header = () => (
       </NavLink>
     </li>
     <li>
-      <NavLink activeStyle={{ color: 'tomato' }} to="/news">
+      <NavLink activeStyle={{ color: 'tomato' }} to="/newss">
         News
       </NavLink>
     </li>

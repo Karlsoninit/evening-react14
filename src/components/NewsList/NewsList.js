@@ -1,6 +1,6 @@
 import React from 'react';
 import NewsListItem from '../NewsListItem/NewsListItem';
-const NewsList = ({ data, category }) => {
+const NewsList = ({ data, category, param }) => {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {data.map(article => {
@@ -9,6 +9,7 @@ const NewsList = ({ data, category }) => {
           <NewsListItem
             category={category}
             key={article.publishedAt}
+            param={param}
             {...article}
           />
         );

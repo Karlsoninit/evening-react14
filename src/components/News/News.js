@@ -63,7 +63,7 @@ class News extends Component {
 
   render() {
     const { news, spinner } = this.state;
-    console.log('re - render');
+    // console.log('re - render');
     return (
       <>
         <RenderPropHOC>
@@ -84,7 +84,11 @@ class News extends Component {
         <NewsSelect onChange={this.onChange} />
         {spinner && <Loader />}
         {news.length > 0 && (
-          <NewsList category={this.state.selectValue} data={news} />
+          <NewsList
+            category={this.state.selectValue}
+            data={news}
+            param={this.props.match.path}
+          />
         )}
       </>
     );
