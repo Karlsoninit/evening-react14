@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { getNews } from '../../api';
 import queryString from 'query-string';
 import { Redirect } from 'react-router-dom';
+import { getNews } from '../../api';
+
 class SomeArticle extends Component {
   state = {
     article: null,
   };
+
   componentDidMount() {
     const parsed = queryString.parse(this.props.match.params.someArticle);
     console.log('parsed', parsed);
@@ -22,6 +24,7 @@ class SomeArticle extends Component {
       }),
     );
   }
+
   back = () => <Redirect to="/newss" />;
 
   render() {

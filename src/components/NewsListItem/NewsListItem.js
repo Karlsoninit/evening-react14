@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { Consumer } from '../App';
 import css from './NewsListItem.module.css';
-import { Link, NavLink } from 'react-router-dom';
 // console.log('css', css);
 
 const NewsListItem = ({
@@ -22,7 +22,7 @@ const NewsListItem = ({
             to={{
               pathname: `${param}/category=${category}&search=${publishedAt}&name=${title}`,
               state: {
-                category: category,
+                category,
                 params: param,
               },
             }}

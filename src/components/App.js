@@ -1,10 +1,9 @@
 import React, { Component, createContext } from 'react';
-
 import { Route, Switch, Link, NavLink } from 'react-router-dom';
-
+import DropDownMenu from '../components/DropDown/DropDown';
 import Header from './navigation/header/Header';
 import Nav from './navigation/nav/Nav';
-
+// import DropDown from './animations/DropDownMenu/DropDownMenu';
 export const { Provider, Consumer } = createContext({
   someText: 'text',
 });
@@ -32,6 +31,8 @@ class App extends Component {
     const { theme } = this.state;
     return (
       <>
+        <DropDownMenu />
+        {/* <DropDown /> */}
         <Header />
         <Nav />
         {/* <button
