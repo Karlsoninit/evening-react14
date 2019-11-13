@@ -1,60 +1,44 @@
-import React, { Component, createContext } from 'react';
-import { Route, Switch, Link, NavLink } from 'react-router-dom';
-import DropDownMenu from '../components/DropDown/DropDown';
-import Header from './navigation/header/Header';
-import Nav from './navigation/nav/Nav';
-// import DropDown from './animations/DropDownMenu/DropDownMenu';
-export const { Provider, Consumer } = createContext({
-  someText: 'text',
-});
-
-export const myProvider = createContext({
-  someText: 'text',
-});
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { increment, decrement } from '../redux/actions';
+import { dispatch } from 'rxjs/internal/observable/range';
 class App extends Component {
   state = {
-    theme: 'white',
+    step: 10,
   };
 
-  changeTheme = () => {
-    this.setState(prevTheme => ({
-      theme: prevTheme.theme === 'white' ? 'black' : 'white',
-    }));
+  increment = () => {
+    this.props.incrementCount(this.state.step);
   };
-
-  changeColor = () => {
-    console.log('change');
+  decrement = () => {
+    this.props.decrementCount(this.state.step);
   };
 
   render() {
-    const { theme } = this.state;
+    console.log(this.props);
+    const { defaultCount } = this.props;
+    // const { count } = this.state;
+
     return (
-      <>
-        <DropDownMenu />
-        {/* <DropDown /> */}
-        <Header />
-        <Nav />
-        {/* <button
-          style={{
-            backgroundColor: theme === 'white' ? 'black' : 'white',
-            color: theme === 'white' ? 'white' : 'black',
-          }}
-          onClick={this.changeTheme}
-        >
-          {theme === 'white' ? 'black' : 'white'}
-        </button>
-        <Provider
-          value={{
-            theme,
-            fn: this.changeTheme,
-          }}
-        >
-          <News />
-        </Provider> */}
-      </>
+      <div style={{ width: '300px', margin: 'auto' }}>
+        <button onClick={this.increment}>INCREMENT</button>
+        <h2>{defaultCount}</h2>
+        <button onClick={this.decrement}>DECREMENT</button>
+      </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  defaultCount: state.count,
+});
+
+const m = dis => ({
+  incrementCount: value => dis(increment(value)),
+  decrementCount: value => dis(decrement(value)),
+});
+
+export default connect(
+  mapStateToProps,
+  m,
+)(App);
