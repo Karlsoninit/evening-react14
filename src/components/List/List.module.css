@@ -1,0 +1,9 @@
+.container {
+  width: 400px;
+  border: 1px solid tomato;
+  padding: 20px;
+}
+
+.imageContainer {
+  width: 100%;
+}

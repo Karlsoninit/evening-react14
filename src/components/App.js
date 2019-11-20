@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { increment, decrement } from '../redux/actions';
-import { dispatch } from 'rxjs/internal/observable/range';
+import products from '../products.json';
+import List from './List/List';
+import Selected from '../components/Select/Select';
+import { filter } from './Select/selectors';
 class App extends Component {
   state = {
     step: 10,
   };
+
+  componentDidMount() {
+    this.props.allProducts(products);
+  }
 
   increment = () => {
     this.props.incrementCount(this.state.step);
@@ -14,31 +19,31 @@ class App extends Component {
     this.props.decrementCount(this.state.step);
   };
 
+  chooseIngredients = value => {
+    this.setState({
+      ingredients: value.value,
+    });
+  };
+
   render() {
-    console.log(this.props);
-    const { defaultCount } = this.props;
-    // const { count } = this.state;
+    const { defaultCount, products } = this.props;
+    const { ingredients } = this.state;
+    // console.log(products);
+    const getIngr = filter(products, ingredients);
+    // console.log(getIngr);
 
     return (
-      <div style={{ width: '300px', margin: 'auto' }}>
+      <div>
         <button onClick={this.increment}>INCREMENT</button>
         <h2>{defaultCount}</h2>
         <button onClick={this.decrement}>DECREMENT</button>
+        <Selected handleChange={this.chooseIngredients} />
+        <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
+          <List products={getIngr.length !== 0 ? getIngr : products} />
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  defaultCount: state.count,
-});
-
-const m = dis => ({
-  incrementCount: value => dis(increment(value)),
-  decrementCount: value => dis(decrement(value)),
-});
-
-export default connect(
-  mapStateToProps,
-  m,
-)(App);
+export default App;

@@ -1,14 +1,30 @@
 import { Type } from './actions';
-
-const reducer = (state = { count: 0 }, { type, payload }) => {
+import { combineReducers } from 'redux';
+import productsAll from '../products.json';
+console.log(productsAll);
+const count = (state = 0, { type, payload }) => {
   switch (type) {
     case Type.COUNT_INCREMENT:
-      return { ...state, count: state.count + payload };
+      return state + payload;
     case Type.COUNT_DECREMENT:
-      return { ...state, count: state.count - payload };
+      return state - payload;
     default:
       return state;
   }
 };
 
-export default reducer;
+const products = (state = [], { type, payload }) => {
+  switch (type) {
+    case Type.GET_ALL_PRODUCTS:
+      return payload;
+    case Type.DELETE_ITEMS:
+      return state.filter(elem => elem.id !== payload);
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  count,
+  products,
+});
