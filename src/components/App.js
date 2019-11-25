@@ -3,13 +3,18 @@ import products from '../products.json';
 import List from './List/List';
 import Selected from '../components/Select/Select';
 import { filter } from './Select/selectors';
+import getNews from '../redux/operations';
+import { connect } from 'react-redux';
 class App extends Component {
   state = {
     step: 10,
+    ingredients: '',
   };
 
   componentDidMount() {
+    console.log('woooork redux');
     this.props.allProducts(products);
+    this.props.getNews();
   }
 
   increment = () => {
@@ -30,6 +35,7 @@ class App extends Component {
     const { ingredients } = this.state;
     // console.log(products);
     const getIngr = filter(products, ingredients);
+    console.log('data ------------------->', this.props.data);
     // console.log(getIngr);
 
     return (
@@ -46,4 +52,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  data: state.news,
+});
+
+const mapDispatchToProps = {
+  getNews,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

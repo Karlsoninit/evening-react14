@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import css from './List.module.css';
-import { deleteItem } from '../../redux/actions';
+import { deleteProducts } from '../../redux/actions';
 
 const List = props =>
   props.products.map(elem => {
@@ -9,7 +9,10 @@ const List = props =>
       <div key={elem.id} className={css.container}>
         <h2>{elem.name}</h2>
         <img className={css.imageContainer} src={elem.image} />
-        <button onClick={() => props.deleteItem(elem.id)}>Delete</button>
+        <button type="button" onClick={() => props.deleteProducts(elem.id)}>
+          DELETE
+        </button>
+        <h2>{elem.ingredients}</h2>
       </div>
     );
   });
@@ -17,7 +20,7 @@ const List = props =>
 // const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {
-  deleteItem,
+  deleteProducts,
 };
 
 export default connect(

@@ -1,10 +1,6 @@
 import { connect } from 'react-redux';
-import {
-  increment,
-  decrement,
-  getAllProducts,
-  chooseIngredients,
-} from '../redux/actions';
+import lodash from 'lodash';
+import { increment, decrement, getAllProducts } from '../redux/actions';
 import App from './App';
 
 const getCount = state => state.count;
@@ -15,10 +11,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  incrementCount: value => dispatch(increment(value)),
+  incrementCount: lodash.throttle(value => dispatch(increment(value)), 2000),
   decrementCount: value => dispatch(decrement(value)),
   allProducts: value => dispatch(getAllProducts(value)),
-  getIngredients: value => dispatch(chooseIngredients(value)),
 });
 
 export default connect(
